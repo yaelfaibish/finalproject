@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name:redis-storage-yael
+spec:
+  containers:
+  - image: redis:alpine
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - mountPath: /data/redis
+      name: redis-storage-yael
+  volumes:
+  - name: redis-storage-yael
+    emptyDir: {}
