@@ -1,0 +1,22 @@
+*************************
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: finance-yael
+  labels:
+    name: finance-yael
+    
+*************************
+apiVersion: v1
+kind: Pod
+metadata:
+  name: temp-bus
+  labels:
+    name: finance-yael
+spec:
+  containers:
+  - name: finance-yael
+    image: redis:alpine
+  ************************
+  
+  kubectl apply -f pod.yaml --namespace=finance-yael
