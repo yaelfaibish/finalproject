@@ -1,14 +1,53 @@
+
 apiVersion: v1
 kind: Pod
 metadata:
-creationTimestamp: null
-labels:
-run: use-pv
-name: use-pvspec-yourname
-containers:
-- image: nginx
-name: use-pv
-resources: {}
-dnsPolicy: ClusterFirst
-restartPolicy: Always
+  name: use-pvspec-yael
+  creationTimestamp: null
+  labels:
+    run: use-pv  
+spec:
+  containers:
+    - name: use-pv
+      image: nginx
+      resources: {}            
+      volumeMounts:
+        - mountPath: "/data"
+          name: nginx
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+  - name: nginx
+    persistentVolumeClaim:
+      claimName: pvc-1
 status: {}
+
+*****************
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-1
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"
+    
+    ****************
+    
+    apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-1
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
