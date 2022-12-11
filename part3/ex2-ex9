@@ -1,0 +1,47 @@
+2) kubectl rollout status -w deployment/webapp
+***********************************************
+3)kubectl get rs
+***********************************************
+4)-kubectl get pods  -o yaml > webapp.yaml
+  -kubectl get rs  -o yaml > rs.yaml 
+***********************************************
+5)-kubectl get deploy
+  -kubectl delete deploy webapp
+***********************************************
+6)a)kubectl create deploy webapp --image=nginx:1.17.1 --dry-run -o yaml > webapp.yaml
+  kubectl apply -f webapp.yaml
+  b)  creationTimestamp: null
+  labels:
+    app: webapp
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - image: nginx:1.17.1
+        name: nginx
+        resources: {}
+        ports:
+        - containerPort: 80
+status: {}
+**************************
+ kubectl apply -f webapp.yaml
+ ***********************************************  
+ 7)kubectl set image deployment/webapp nginx=nginx:1.17.4
+ verify by:
+ kubectl describe deploy webapp
+***********************************************
+8)kubectl rollout history deployment/webapp
+***********************************************
+9)kubectl rollout undo deployment/webapp --to-revision=2
+***********************************************
+
