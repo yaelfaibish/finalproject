@@ -1,1 +1,36 @@
-10) a)
+10) a)-kubectl set image deployment/webapp nginx=nginx:1.100
+      -kubectl get pods
+    b)kubectl rollout undo deployment/webapp
+    c)kubectl rollout undo deployment/webapp --to-revision=7
+    d)kubectl rollout history deployment/webapp
+    e)-kubectl set image deployment/webapp nginx=nginx:latest
+      -kubectl rollout history deployment/webapp
+      -kubectl describe deploy webapp
+************************************************************
+11)kubectl autoscale deployment webapp --cpu-percent=85 --min=10 --max=20
+ ************************************************************
+13)-kubectl delete hpa webapp
+     -kubectl delete deploy webapp
+************************************************************
+14) - kubectl create job hello-job --image=busybox --dry-run -o yaml -- echo "Hello I am from job" > hello-job.yaml” 
+***************************************************
+ apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: hello-job
+spec:
+  completions: 10
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - command:
+        - echo
+        - Hello I am from job
+        image: busybox
+        name: hello-job
+        resources: {}
+      restartPolicy: Never
+status: {}
