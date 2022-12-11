@@ -16,3 +16,7 @@ spec:
     kubernetes.io/role: node
     nodeName: nginx-node
 status: {}
+
+*********************************************
+17) kubectl describe pod nginx | grep Node-Selectors
+18) kubectl describe pod nginx | grep Labels
