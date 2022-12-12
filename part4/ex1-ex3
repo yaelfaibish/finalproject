@@ -7,7 +7,7 @@ cat config.txt
 2)-kubectl create cm keyvalcfgmap --from-env-file=config.txt
   - kubectl get cm keyvalcfgmap -o yaml
 *****************************
-3)-kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml > nginx-pod.yml
+3)-kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml > nginx-pod.yaml
 ************************************************************************************
 apiVersion: v1
 kind: Pod
@@ -28,6 +28,6 @@ spec:
   restartPolicy: Never
 status: {}
 ***************************************************************************************
--kubectl create -f nginx-pod.yml
+-kubectl create -f nginx-pod.yaml
 -kubectl exec -it nginx -- env
 -kubectl delete pod nginx
